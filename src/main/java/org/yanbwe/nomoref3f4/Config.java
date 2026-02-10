@@ -31,7 +31,7 @@ public class Config {
         DISABLED_DIMENSIONS = BUILDER
             .comment("禁用旁观模式的维度列表，格式如：[\"minecraft:the_nether\", \"minecraft:the_end\"]")
             .translation("config.nomoref3f4.disabled_dimensions")
-            .defineList("disabled_dimensions", Arrays.asList(), obj -> obj instanceof String);
+            .defineList("disabled_dimensions", Arrays.asList("twilightforest:twilight_forest"), obj -> obj instanceof String);
             
         BUILDER.pop();
     }
