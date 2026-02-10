@@ -1,0 +1,19 @@
+{
+  "mod.nomoref3f4.name": "旁观时间管理大师",
+  "mod.nomoref3f4.description": "管理系统旁观模式使用权限和时间限制",
+  
+  "config.nomoref3f4.title": "旁观时间管理大师配置",
+  "config.nomoref3f4.allowed_admins": "允许的管理员",
+  "config.nomoref3f4.allowed_admins.tooltip": "允许使用旁观模式的玩家名称列表",
+  "config.nomoref3f4.disabled_dimensions": "禁用维度",
+  "config.nomoref3f4.disabled_dimensions.tooltip": "禁用旁观模式的维度列表",
+  
+  "message.nomoref3f4.no_permission": "你目前不配使用旁观。",
+  "message.nomoref3f4.dimension_disabled": "当前维度禁止使用旁观。",
+  "message.nomoref3f4.insufficient_credit": "信用值不足，不配使用旁观模式。",
+  "message.nomoref3f4.exit_spectator": "退出旁观模式，扣除%d信用值。",
+  "message.nomoref3f4.config_reloaded": "配置文件已重载",
+  "message.nomoref3f4.mod_initialized": "我让你少用旁观你耳朵聋吗",
+  "message.nomoref3f4.server_started": "我让你少用旁观你耳朵聋吗",
+  "message.nomoref3f4.sanction_broadcast": "%s试图在信用点为负时切旁观，系统已制裁！👍👍👍"
+}

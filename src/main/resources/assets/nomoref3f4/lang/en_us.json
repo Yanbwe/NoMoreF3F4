@@ -1,0 +1,19 @@
+{
+  "mod.nomoref3f4.name": "Spectator Time Manager",
+  "mod.nomoref3f4.description": "Manage spectator mode permissions and time restrictions",
+  
+  "config.nomoref3f4.title": "Spectator Time Manager Configuration",
+  "config.nomoref3f4.allowed_admins": "Allowed Administrators",
+  "config.nomoref3f4.allowed_admins.tooltip": "List of player names allowed to use spectator mode",
+  "config.nomoref3f4.disabled_dimensions": "Disabled Dimensions",
+  "config.nomoref3f4.disabled_dimensions.tooltip": "List of dimensions where spectator mode is disabled",
+  
+  "message.nomoref3f4.no_permission": "You don't have permission to use spectator mode.",
+  "message.nomoref3f4.dimension_disabled": "Spectator mode is disabled in current dimension.",
+  "message.nomoref3f4.insufficient_credit": "Insufficient credit to use spectator mode.",
+  "message.nomoref3f4.exit_spectator": "Exited spectator mode, deducted %d credits.",
+  "message.nomoref3f4.config_reloaded": "Configuration file reloaded",
+  "message.nomoref3f4.mod_initialized": "Spectator Time Manager mod initialized",
+  "message.nomoref3f4.server_started": "Server started, Spectator Time Management system activated",
+  "message.nomoref3f4.sanction_broadcast": "%s attempted to enter spectator mode with negative credits, system sanctioned! \uD83D\uDC4D\uD83D\uDC4D\uD83D\uDC4D"
+}
