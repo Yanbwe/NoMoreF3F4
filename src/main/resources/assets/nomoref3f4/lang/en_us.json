@@ -15,5 +15,22 @@
   "message.nomoref3f4.config_reloaded": "Configuration file reloaded",
   "message.nomoref3f4.mod_initialized": "Spectator Time Manager mod initialized",
   "message.nomoref3f4.server_started": "Server started, Spectator Time Management system activated",
-  "message.nomoref3f4.sanction_broadcast": "%s attempted to enter spectator mode with negative credits, system sanctioned! \uD83D\uDC4D\uD83D\uDC4D\uD83D\uDC4D"
+  "message.nomoref3f4.sanction_broadcast": "%s attempted to enter spectator mode with negative credits, system sanctioned! \uD83D\uDC4D\uD83D\uDC4D\uD83D\uDC4D",
+  
+  "message.nomoref3f4.command_check_own_credit": "Your current credit: %d",
+  "message.nomoref3f4.command_player_only": "This command can only be executed by players",
+  "message.nomoref3f4.command_check_player_credit": "Player %s's credit: %d",
+  "message.nomoref3f4.command_player_not_found": "Cannot find specified player",
+  "message.nomoref3f4.command_admin_required": "You are not an administrator, cannot execute this command",
+  "message.nomoref3f4.command_set_credit_success": "Set player %s's credit to: %d",
+  "message.nomoref3f4.command_set_credit_notify": "Your credit has been set to: %d by administrator",
+  "message.nomoref3f4.command_execute_failed": "Command execution failed: %s",
+  "message.nomoref3f4.command_add_credit_success": "Added %d credits to player %s, current: %d",
+  "message.nomoref3f4.command_add_credit_notify": "Your credit increased by %d points, current: %d",
+  "message.nomoref3f4.command_remove_credit_success": "Removed %d credits from player %s, current: %d",
+  "message.nomoref3f4.command_remove_credit_notify": "Your credit decreased by %d points, current: %d",
+  "message.nomoref3f4.command_reload_success": "Configuration file reloaded successfully",
+  "message.nomoref3f4.command_reload_notify": "New configuration values are now effective",
+  "message.nomoref3f4.command_reload_failed": "Configuration reload failed: %s",
+  "message.nomoref3f4.command_config_saved": "Configuration saved to disk"
 }

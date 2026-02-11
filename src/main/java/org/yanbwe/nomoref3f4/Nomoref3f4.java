@@ -36,10 +36,10 @@ public class Nomoref3f4 {
         // 注册事件监听器
         MinecraftForge.EVENT_BUS.register(EventHandler.class);
 
-        // 注册服务器配置
-        System.out.println("[DEBUG] 开始注册SERVER配置");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SPEC);
-        System.out.println("[DEBUG] SERVER配置注册完成");
+        // 注册通用配置（支持单机和服务器）
+        System.out.println("[DEBUG] 开始注册COMMON配置");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        System.out.println("[DEBUG] COMMON配置注册完成");
         
         LOGGER.info("模组构造函数执行完毕，配置已注册");
     }

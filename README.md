@@ -7,22 +7,42 @@
 ## 🎯 功能特色
 
 ### 核心机制
-每个玩家都有自己的信用点，不用旁观就加，用旁观就减，在旁观和生存之间切换立马大把大把的减。我管你啥的，没有信用点就不要用旁观了，懂了吗。
+每个玩家都有自己的信用点，不用旁观就加，用旁观就减，在旁观和生存之间切换立马大把大把的减。不管你是谁，没有信用点就不要用旁观了！
 
 ### 管理功能
-你有op并不代表你就可以控制系统了，我的系统我做主。想在哪个维度禁用旁观、让规则怎么小气都可以！
+有op并不代表就可以控制系统了，利用白名单系统，自己的服务器自己做主。想在哪个维度禁用旁观、让规则怎么小气都可以！
 
-## ⚙️ 配置说明
+## 🛠️ 配置说明
 
-配置文件位于: `config/nomoref3f4-server.toml`
+配置文件位于: `config/nomoref3f4-common.toml`
+这是模组唯一的配置文件
 
 ```toml
+# 服务器配置
+[服务器配置]
 # 允许使用旁观模式的管理员列表
-allowed_admins = ["Player", "Dev", "Admin", "Yanbwe"]
+allowed_admins = ["Player", "Dev", "Admin", "Yanbwe", "TestUser"]
 
 # 禁用旁观模式的维度列表
 # 格式: ["minecraft:the_nether", "minecraft:the_end"]
 disabled_dimensions = ["twilightforest:twilight_forest"]
+
+# 信用点配置
+[信用点配置]
+# 信用点上限值
+credit_max = 12000
+
+# 信用点下限值（可为负数）
+credit_min = -2400
+
+# 切换到旁观模式时扣除的信用点数量
+spectator_cost = 2400
+
+# 非旁观模式下每tick恢复的信用点数量
+tick_recovery = 1
+
+# 旁观模式下每tick消耗的信用点数量（应为负数）
+tick_consumption = -1
 ```
 
 ### 管理员命令

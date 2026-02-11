@@ -72,10 +72,10 @@ public class CommandHandler {
         CommandSourceStack source = context.getSource();
         if (source.getEntity() instanceof ServerPlayer player) {
             int credit = CreditManager.getCredit(player);
-            source.sendSuccess(() -> Component.literal("§a你的当前信用点: " + credit), false);
+            source.sendSuccess(() -> LangManager.getColoredMessage(LangManager.COMMAND_CHECK_OWN_CREDIT, "#00FF00", credit), false);
             return 1;
         }
-        source.sendFailure(Component.literal("§c只能由玩家执行此命令"));
+        source.sendFailure(LangManager.getColoredMessage(LangManager.COMMAND_PLAYER_ONLY, "#FF0000"));
         return 0;
     }
     
@@ -87,10 +87,10 @@ public class CommandHandler {
         try {
             ServerPlayer targetPlayer = EntityArgument.getPlayer(context, "player");
             int credit = CreditManager.getCredit(targetPlayer);
-            source.sendSuccess(() -> Component.literal("§a玩家 " + targetPlayer.getName().getString() + " 的信用点: " + credit), false);
+            source.sendSuccess(() -> LangManager.getColoredMessage(LangManager.COMMAND_CHECK_PLAYER_CREDIT, "#00FF00", targetPlayer.getName().getString(), credit), false);
             return 1;
         } catch (Exception e) {
-            source.sendFailure(Component.literal("§c无法找到指定玩家"));
+            source.sendFailure(LangManager.getColoredMessage(LangManager.COMMAND_PLAYER_NOT_FOUND, "#FF0000"));
             return 0;
         }
     }
@@ -102,7 +102,7 @@ public class CommandHandler {
         CommandSourceStack source = context.getSource();
         
         if (!isAdmin(source)) {
-            source.sendFailure(Component.literal("§c你不是管理员，无法执行此命令"));
+            source.sendFailure(LangManager.getColoredMessage(LangManager.COMMAND_ADMIN_REQUIRED, "#FF0000"));
             return 0;
         }
         
@@ -111,11 +111,11 @@ public class CommandHandler {
             int amount = IntegerArgumentType.getInteger(context, "amount");
             
             CreditManager.setCredit(targetPlayer, amount);
-            source.sendSuccess(() -> Component.literal("§a已将玩家 " + targetPlayer.getName().getString() + " 的信用点设置为: " + amount), true);
-            targetPlayer.sendSystemMessage(Component.literal("§e你的信用点已被管理员设置为: " + amount));
+            source.sendSuccess(() -> LangManager.getColoredMessage(LangManager.COMMAND_SET_CREDIT_SUCCESS, "#00FF00", targetPlayer.getName().getString(), amount), true);
+            targetPlayer.sendSystemMessage(LangManager.getColoredMessage(LangManager.COMMAND_SET_CREDIT_NOTIFY, "#FFFF00", amount));
             return 1;
         } catch (Exception e) {
-            source.sendFailure(Component.literal("§c命令执行失败: " + e.getMessage()));
+            source.sendFailure(LangManager.getColoredMessage(LangManager.COMMAND_EXECUTE_FAILED, "#FF0000", e.getMessage()));
             return 0;
         }
     }
@@ -127,7 +127,7 @@ public class CommandHandler {
         CommandSourceStack source = context.getSource();
         
         if (!isAdmin(source)) {
-            source.sendFailure(Component.literal("§c你不是管理员，无法执行此命令"));
+            source.sendFailure(LangManager.getColoredMessage(LangManager.COMMAND_ADMIN_REQUIRED, "#FF0000"));
             return 0;
         }
         
@@ -139,11 +139,11 @@ public class CommandHandler {
             int newCredit = currentCredit + amount;
             CreditManager.setCredit(targetPlayer, newCredit);
             
-            source.sendSuccess(() -> Component.literal("§a已为玩家 " + targetPlayer.getName().getString() + " 增加 " + amount + " 信用点，当前: " + newCredit), true);
-            targetPlayer.sendSystemMessage(Component.literal("§e你的信用点已增加 " + amount + " 点，当前: " + newCredit));
+            source.sendSuccess(() -> LangManager.getColoredMessage(LangManager.COMMAND_ADD_CREDIT_SUCCESS, "#00FF00", targetPlayer.getName().getString(), amount, newCredit), true);
+            targetPlayer.sendSystemMessage(LangManager.getColoredMessage(LangManager.COMMAND_ADD_CREDIT_NOTIFY, "#FFFF00", amount, newCredit));
             return 1;
         } catch (Exception e) {
-            source.sendFailure(Component.literal("§c命令执行失败: " + e.getMessage()));
+            source.sendFailure(LangManager.getColoredMessage(LangManager.COMMAND_EXECUTE_FAILED, "#FF0000", e.getMessage()));
             return 0;
         }
     }
@@ -155,7 +155,7 @@ public class CommandHandler {
         CommandSourceStack source = context.getSource();
         
         if (!isAdmin(source)) {
-            source.sendFailure(Component.literal("§c你不是管理员，无法执行此命令"));
+            source.sendFailure(LangManager.getColoredMessage(LangManager.COMMAND_ADMIN_REQUIRED, "#FF0000"));
             return 0;
         }
         
@@ -167,11 +167,11 @@ public class CommandHandler {
             int newCredit = currentCredit - amount;
             CreditManager.setCredit(targetPlayer, newCredit);
             
-            source.sendSuccess(() -> Component.literal("§a已为玩家 " + targetPlayer.getName().getString() + " 减少 " + amount + " 信用点，当前: " + newCredit), true);
-            targetPlayer.sendSystemMessage(Component.literal("§e你的信用点已减少 " + amount + " 点，当前: " + newCredit));
+            source.sendSuccess(() -> LangManager.getColoredMessage(LangManager.COMMAND_REMOVE_CREDIT_SUCCESS, "#00FF00", targetPlayer.getName().getString(), amount, newCredit), true);
+            targetPlayer.sendSystemMessage(LangManager.getColoredMessage(LangManager.COMMAND_REMOVE_CREDIT_NOTIFY, "#FFFF00", amount, newCredit));
             return 1;
         } catch (Exception e) {
-            source.sendFailure(Component.literal("§c命令执行失败: " + e.getMessage()));
+            source.sendFailure(LangManager.getColoredMessage(LangManager.COMMAND_EXECUTE_FAILED, "#FF0000", e.getMessage()));
             return 0;
         }
     }
@@ -183,16 +183,23 @@ public class CommandHandler {
         CommandSourceStack source = context.getSource();
         
         if (!isAdmin(source)) {
-            source.sendFailure(Component.literal("§c你不是管理员，无法执行此命令"));
+            source.sendFailure(LangManager.getColoredMessage(LangManager.COMMAND_ADMIN_REQUIRED, "#FF0000"));
             return 0;
         }
         
         try {
-            // 触发配置重载
-            source.sendSuccess(() -> Component.literal("§a配置文件重载命令已执行"), true);
+            // 通知配置系统重新加载
+            Config.onReload();
+            // 强制保存配置到磁盘
+            Config.forceSaveConfig();
+            
+            source.sendSuccess(() -> LangManager.getColoredMessage(LangManager.COMMAND_RELOAD_SUCCESS, "#00FF00"), true);
+            source.sendSuccess(() -> LangManager.getColoredMessage(LangManager.COMMAND_RELOAD_NOTIFY, "#FFFF00"), false);
+            source.sendSuccess(() -> LangManager.getColoredMessage("message.nomoref3f4.command_config_saved", "#00FF00"), false);
             return 1;
         } catch (Exception e) {
-            source.sendFailure(Component.literal("§c配置重载失败: " + e.getMessage()));
+            source.sendFailure(LangManager.getColoredMessage(LangManager.COMMAND_RELOAD_FAILED, "#FF0000", e.getMessage()));
+            e.printStackTrace();
             return 0;
         }
     }

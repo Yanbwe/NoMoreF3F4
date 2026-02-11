@@ -62,8 +62,9 @@ public class EventHandler {
         }
         // 从旁观模式退出时扣除信用值
         else if (oldGameMode == GameType.SPECTATOR && newGameMode != GameType.SPECTATOR) {
-            CreditManager.modifyCredit(player, -1200);
-            player.sendSystemMessage(LangManager.getMessage(LangManager.EXIT_SPECTATOR, 1200));
+            int cost = Config.SPECTATOR_COST.get();
+            CreditManager.modifyCredit(player, -cost);
+            player.sendSystemMessage(LangManager.getMessage(LangManager.EXIT_SPECTATOR, cost));
             // 发送当前信用点提示
             sendCreditInfoMessage(player);
         }
@@ -91,16 +92,17 @@ public class EventHandler {
         
         // 根据游戏模式更新信用值
         if (player.gameMode.getGameModeForPlayer() == GameType.SPECTATOR) {
-            // 旁观状态下每tick消耗1信用值，可为负数
-            CreditManager.modifyCreditInSpectator(player, -1);
+            // 旁观状态下每tick消耗配置的信用值，可为负数
+            CreditManager.modifyCreditInSpectator(player, Config.TICK_CONSUMPTION.get());
         } else {
-            // 非旁观状态下每tick恢复1信用值
-            CreditManager.modifyCredit(player, 1);
+            // 非旁观状态下每tick恢复配置的信用值
+            CreditManager.modifyCredit(player, Config.TICK_RECOVERY.get());
         }
     }
     
     /**
      * 向所有在线玩家广播制裁消息
+     * 使用通用方法确保1.19和1.20版本兼容
      * @param player 被制裁的玩家
      */
     private static void broadcastSanctionMessage(ServerPlayer player) {
@@ -108,7 +110,10 @@ public class EventHandler {
         if (server != null) {
             String playerName = player.getName().getString();
             Component message = LangManager.getMessage(LangManager.SANCTION_BROADCAST, playerName);
-            server.getPlayerList().broadcastSystemMessage(message, false);
+            // 使用遍历方法替代broadcastSystemMessage，确保版本兼容性
+            for (ServerPlayer onlinePlayer : server.getPlayerList().getPlayers()) {
+                onlinePlayer.sendSystemMessage(message);
+            }
         }
     }
     

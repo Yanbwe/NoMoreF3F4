@@ -11,21 +11,17 @@ public class CreditManager {
     
     // 信用值存储键名
     private static final String CREDIT_KEY = "nomoref3f4.credit";
-    // 信用值上限
-    private static final int CREDIT_MAX = 12000;
-    // 信用值下限（可为负数）
-    private static final int CREDIT_MIN = -1200;
     
     /**
      * 获取玩家当前信用值
      * @param player 服务器玩家对象
-     * @return 当前信用值，若无记录则返回最大值12000
+     * @return 当前信用值，若无记录则返回配置的最大值
      */
     public static int getCredit(ServerPlayer player) {
         CompoundTag persistentData = player.getPersistentData();
         if (!persistentData.contains(CREDIT_KEY)) {
             // 新玩家默认满信用点
-            return CREDIT_MAX;
+            return Config.CREDIT_MAX.get();
         }
         return persistentData.getInt(CREDIT_KEY);
     }
@@ -37,8 +33,8 @@ public class CreditManager {
      */
     public static void setCredit(ServerPlayer player, int value) {
         CompoundTag persistentData = player.getPersistentData();
-        // 限制信用值范围：-1200 到 12000
-        int clampedValue = Math.max(Math.min(value, CREDIT_MAX), CREDIT_MIN);
+        // 限制信用值范围：配置的下限到上限
+        int clampedValue = Math.max(Math.min(value, Config.CREDIT_MAX.get()), Config.CREDIT_MIN.get());
         persistentData.putInt(CREDIT_KEY, clampedValue);
     }
     
@@ -49,8 +45,8 @@ public class CreditManager {
      */
     public static void setCreditInSpectator(ServerPlayer player, int value) {
         CompoundTag persistentData = player.getPersistentData();
-        // 旁观模式下信用值可为负数，最低-1200
-        int clampedValue = Math.max(Math.min(value, CREDIT_MAX), CREDIT_MIN);
+        // 旁观模式下信用值可为负数，最低为配置的下限值
+        int clampedValue = Math.max(Math.min(value, Config.CREDIT_MAX.get()), Config.CREDIT_MIN.get());
         persistentData.putInt(CREDIT_KEY, clampedValue);
     }
     
