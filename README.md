@@ -20,7 +20,7 @@
 ```toml
 # 服务器配置
 [服务器配置]
-# 允许使用旁观模式的管理员列表
+# 允许使用本模组指令的玩家列表(白名单)
 allowed_admins = ["Player", "Dev", "Admin", "Yanbwe", "TestUser"]
 
 # 禁用旁观模式的维度列表
@@ -49,10 +49,10 @@ tick_consumption = -1
 ```
 /nomoref3f4 check                    # 查看自己的信用点
 /nomoref3f4 check <玩家名>           # 查看指定玩家信用点
-/nomoref3f4 set <玩家名> <数值>      # 设置玩家信用点
-/nomoref3f4 add <玩家名> <数值>      # 增加玩家信用点
-/nomoref3f4 remove <玩家名> <数值>   # 减少玩家信用点
-/nomoref3f4 reload                   # 重载配置文件
+/nomoref3f4 set <玩家名> <数值>      # 设置玩家信用点(仅白名单玩家可用)
+/nomoref3f4 add <玩家名> <数值>      # 增加玩家信用点(仅白名单玩家可用)
+/nomoref3f4 remove <玩家名> <数值>   # 减少玩家信用点(仅白名单玩家可用)
+/nomoref3f4 reload                   # 重载配置文件(仅白名单玩家可用)
 ```
 
 *让旁观不再滥用，让游戏更加耐玩！* 🎮✨😋
